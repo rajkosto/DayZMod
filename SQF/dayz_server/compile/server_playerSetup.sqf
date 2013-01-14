@@ -35,7 +35,7 @@ _state = 		[];
 _doLoop = 0;
 while {_doLoop < 5} do {
 	_key = format["CHILD:102:%1:",_characterID];
-	_primary = [_key,false,dayZ_hivePipeAuth] call server_hiveReadWrite;
+	_primary = _key call server_hiveReadWrite;
 	if (count _primary > 0) then {
 		if ((_primary select 0) != "ERROR") then {
 			_doLoop = 9;
