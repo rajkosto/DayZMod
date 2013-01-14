@@ -35,9 +35,11 @@ if(_ownerID == dayz_characterID) then {
 	_backpacks = 	getBackpackCargo _obj;
 	
 	dayzDeleteObj = [_objectID,_objectUID];
-	publicVariableServer "dayzDeleteObj";
+	
 	if (isServer) then {
-		dayzDeleteObj call local_deleteObj;
+		dayzDeleteObj call server_deleteObj;
+	} else {
+		publicVariableServer "dayzDeleteObj";
 	};
 	
 	deleteVehicle _obj;

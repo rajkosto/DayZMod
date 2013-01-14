@@ -1,5 +1,5 @@
 /*
-[_objectID,_objectUID] call local_deleteObj;
+[_objectID,_objectUID] call server_deleteObj;
 */
 private["_id","_uid","_key"];
 _id 	= _this select 0;
