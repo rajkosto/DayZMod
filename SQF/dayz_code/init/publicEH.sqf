@@ -1,4 +1,4 @@
-"dayzSetFuel"		addPublicVariableEventHandler {(_this select 1) call local_sefFuel};
+"dayzSetFuel"		addPublicVariableEventHandler {(_this select 1) call local_setFuel};
 "dayzSetFix"		addPublicVariableEventHandler {(_this select 1) call object_setFixServer};
 
 if (isServer) then {
