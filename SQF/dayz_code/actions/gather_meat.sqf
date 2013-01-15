@@ -37,12 +37,7 @@ if ((_hasKnife or _hasKnifeBlunt) and !_hasHarvested) then {
 	
 	_id = [player,50,true,(getPosATL player)] spawn player_alertZombies;
 	
-	dayzGutBody = [_item,_qty];
-	if (isServer) then {
-		dayzGutBody spawn server_gutObject;
-	} else {
-		publicVariableServer "dayzGutBody";
-	};	
+	["dayzGutBody",[_item,_qty]] call callRpcProcedure;
 	
 	sleep 6;
 	_string = format[localize "str_success_gutted_animal",_text,_qty];

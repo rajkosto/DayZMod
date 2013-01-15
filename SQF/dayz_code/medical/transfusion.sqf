@@ -48,10 +48,9 @@ if (_finished) then {
 		r_player_infected = true;
 		player setVariable["USEC_infected",true];
 	};
-	usecTransfuse = [_unit,player];
-	publicVariable "usecTransfuse";
-	dayzHumanity = [player,250];
-	_id = dayzHumanity spawn player_humanityChange;
+	["usecTransfuse",[_unit,player]] call broadcastRpcCallAll;
+
+	["dayzHumanity",[player,250]] call dayzHumanity_code;
 } else {
 	r_interrupt = false;
 	player switchMove "";

@@ -110,9 +110,7 @@ if (count _medical > 0) then {
 	//Add Wounds
 	{
 		_playerObj setVariable[_x,true,true];
-		[_playerObj,_x,_hit] spawn fnc_usec_damageBleed;
-		usecBleed = [_playerObj,_x,0];
-		publicVariable "usecBleed";
+		["usecBleed",[_playerObj,_x,_hit]] call broadcastRpcCallAll;
 	} forEach (_medical select 8);
 	
 	//Add fractures

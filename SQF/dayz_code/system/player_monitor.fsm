@@ -280,11 +280,9 @@ class FSM
            "	_temp = round(player getVariable [""temperature"",100]);" \n
            "	_currentState = [_currentWpn,_currentAnim,_temp];" \n
            "	" \n
-           "	//dayzCharDisco = [dayz_characterID,_playerPos,[weapons player,_magazineArray],[typeOf (unitbackpack player),getWeaponCargo (unitbackpack player),getMagazineCargo (unitbackpack player)],_medical,_currentState,_currentModel];" \n
+           "	//[""dayzCharDisco"",[dayz_characterID,_playerPos,[weapons player,_magazineArray],[typeOf (unitbackpack player),getWeaponCargo (unitbackpack player),getMagazineCargo (unitbackpack player)],_medical,_currentState,_currentModel]] call callRpcProcedure;" \n
            "	//diag_log str(dayzCharDisco);	" \n
            "" \n
-           "	//publicVariableServer ""dayzCharDisco"";" \n
-           "    // remove isServer from player space" \n
            "	dayz_lastSave = time;" \n
            "	dayz_Magazines = [];" \n
            "};"/*%FSM</ACTION""">*/;
@@ -420,13 +418,9 @@ class FSM
        "" \n
        "_msg = [];" \n
        "" \n
-       "dayzLogin = [_playerUID,player];" \n
+       "[""dayzLogin"",[_playerUID,player]] call callRpcProcedure;" \n
        "dayzPlayerLogin = [];" \n
-       "if (isServer) then {" \n
-       "	dayzLogin call server_playerLogin;" \n
-       "} else {" \n
-       "	publicVariableServer ""dayzLogin"";" \n
-       "};"/*%FSM</STATEINIT""">*/;
+       ""/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
       class Links
       {
@@ -635,12 +629,7 @@ class FSM
        "};" \n
        "" \n
        "dayzPlayerLogin2 = [];" \n
-       "dayzLogin2 = [_charID,player,_playerUID];" \n
-       "if (isServer) then {" \n
-       "	dayzLogin2 call server_playerSetup;" \n
-       "} else {" \n
-       "	publicVariableServer ""dayzLogin2"";" \n
-       "};" \n
+       "[""dayzLogin2"",[_charID,player,_playerUID]] call callRpcProcedure;" \n
        "" \n
        "dayz_loadScreenMsg =  ""Requesting Character data from server"";" \n
        "progressLoadingScreen 0.8;" \n
@@ -1135,12 +1124,8 @@ class FSM
       init = /*%FSM<STATEINIT""">*/"dayzGearSave = true;" \n
        "dayz_myPosition = getPosATL player;" \n
        "" \n
-       "dayzLoginRecord = [_playerUID,_charID,0];" \n
-       "if (isServer) then {" \n
-       "	dayzLoginRecord call dayz_recordLogin;" \n
-       "} else {" \n
-       "	publicVariableServer ""dayzLoginRecord"";" \n
-       "};"/*%FSM</STATEINIT""">*/;
+       "[""dayzLoginRecord"",[_playerUID,_charID,0]] call callRpcProcedure;" \n
+       ""/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
       class Links
       {

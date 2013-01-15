@@ -36,9 +36,7 @@ if (local _item) then {
 		if ((time - _timer) > 300) then {_loop = false};
 		sleep 1;
 	};
-	dayzHideBody = _item;
-	publicVariable "dayzHideBody";
-	hideBody _item;
+	["dayzHideBody",_item] call broadcastRpcCallAll;
 	sleep 10;
 	deleteVehicle _item;
 } else {

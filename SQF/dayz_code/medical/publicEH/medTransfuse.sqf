@@ -19,6 +19,7 @@ if (_unit == player) then {
 	
 	player setVariable["USEC_BloodQty",r_player_bloodTotal,true];
 };
+//never true since this EH isn't registered on the server
 if (isServer) then {
 	_unit setVariable["medForceUpdate",true];
 };

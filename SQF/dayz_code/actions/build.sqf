@@ -33,12 +33,7 @@ player reveal _object;
 
 cutText [format[localize "str_build_01",_text], "PLAIN DOWN"];
 
-dayzPublishObj = [dayz_characterID,_object,[_dir,_location],_classname];
-if (isServer) then {
-	dayzPublishObj call server_publishObj;
-} else {
-	publicVariableServer "dayzPublishObj";
-};
+["dayzPublishObj",[dayz_characterID,_object,[_dir,_location],_classname]] call callRpcProcedure;
 
 sleep 2;
 player allowDamage true;

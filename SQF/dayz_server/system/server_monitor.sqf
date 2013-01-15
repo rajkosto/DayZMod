@@ -165,9 +165,7 @@ diag_log "HIVE: Starting";
 	if(_outcome == "PASS") then {
 		_date = _result select 1; 
 		if(isDedicated) then {
-			setDate _date;
-			dayzSetDate = _date;
-			publicVariable "dayzSetDate";
+			["dayzSetDate",_date] call broadcastRpcCallAll;
 		};
 
 		diag_log ("HIVE: Local Time set to " + str(_date));

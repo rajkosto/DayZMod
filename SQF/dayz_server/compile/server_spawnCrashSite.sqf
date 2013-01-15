@@ -76,9 +76,7 @@ while {true} do {
 		_crash setVariable ["ObjectID",1,true];
 
 		if (_spawnFire) then {
-			dayzFire = [_crash,2,time,false,_fadeFire];
-			publicVariable "dayzFire";
-			nul=dayzFire spawn BIS_Effects_Burn;
+			["dayzFire",[_crash,2,time,false,_fadeFire]] call broadcastRpcCallAll;
 			_crash setvariable ["fadeFire",_fadeFire,true];
 		};
 

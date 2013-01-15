@@ -34,13 +34,7 @@ if(_ownerID == dayz_characterID) then {
 	_magazines = 	getMagazineCargo _obj;
 	_backpacks = 	getBackpackCargo _obj;
 	
-	dayzDeleteObj = [_objectID,_objectUID];
-	if (isServer) then {
-		dayzDeleteObj call server_deleteObj;
-	} else {
-		publicVariableServer "dayzDeleteObj";
-	};
-	
+	["dayzDeleteObj",[_objectID,_objectUID]] call callRpcProcedure;	
 	deleteVehicle _obj;
 	
 	//Add weapons

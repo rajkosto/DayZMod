@@ -1,19 +1,26 @@
-"dayzDeath"			addPublicVariableEventHandler {(_this select 1) call server_playerDied};
-"dayzDiscoAdd"		addPublicVariableEventHandler {dayz_disco set [count dayz_disco,(_this select 1)];};
-"dayzDiscoRem"		addPublicVariableEventHandler {dayz_disco = dayz_disco - [(_this select 1)];};
-"dayzPlayerSave"	addPublicVariableEventHandler {(_this select 1) call server_playerSync;};
-"dayzPublishObj"	addPublicVariableEventHandler {(_this select 1) call server_publishObj};
-"dayzUpdateVehicle"	addPublicVariableEventHandler {(_this select 1) call server_updateObject};
-"dayzDeleteObj"		addPublicVariableEventHandler {(_this select 1) call server_deleteObj}; 	
-"dayzLogin"			addPublicVariableEventHandler {(_this select 1) call server_playerLogin};
-"dayzLogin2"		addPublicVariableEventHandler {(_this select 1) call server_playerSetup};
-"dayzPlayerMorph"	addPublicVariableEventHandler {(_this select 1) call server_playerMorph};
-"dayzLoginRecord"	addPublicVariableEventHandler {(_this select 1) call dayz_recordLogin}; 
-"dayzCharDisco"		addPublicVariableEventHandler {(_this select 1) call server_characterSync};
-"dayzSetFix"		addPublicVariableEventHandler {(_this select 1) call object_setFixServer};
-"dayzGutBody"		addPublicVariableEventHandler {(_this select 1) spawn server_gutObject};
+//register client->server rpc
+registerServerRpc = {
+	if (isServer) then { 
+		_this call registerBroadcastRpc; 
+	};
+};
 
-"usecMorphine"		addPublicVariableEventHandler {	
-					(_this select 1) select 0 setVariable["hit_legs",0];
-					(_this select 1) select 0 setVariable["hit_hands",0];
-				};
+["dayzDeath",			{ (_this select 1) call server_playerDied; } 			] call registerServerRpc;
+["dayzDiscoAdd",		{ dayz_disco set [count dayz_disco,(_this select 1)]; }	] call registerServerRpc;
+["dayzDiscoRem",		{ dayz_disco = dayz_disco - [(_this select 1)]; }		] call registerServerRpc;
+["dayzPlayerSave",		{ (_this select 1) call server_playerSync; }			] call registerServerRpc;
+["dayzPublishObj",		{ (_this select 1) call server_publishObj; }			] call registerServerRpc;
+["dayzUpdateVehicle",	{ (_this select 1) call server_updateObject; }			] call registerServerRpc;
+["dayzDeleteObj",		{ (_this select 1) call server_deleteObj; }				] call registerServerRpc;
+["dayzLogin",			{ (_this select 1) call server_playerLogin; }			] call registerServerRpc;
+["dayzLogin2",			{ (_this select 1) call server_playerSetup; }			] call registerServerRpc;
+//missing sqf for server_playerMorph
+//["dayzPlayerMorph",		{ (_this select 1) call server_playerMorph; }			] call registerServerRpc;
+["dayzLoginRecord",		{ (_this select 1) call dayz_recordLogin; }				] call registerServerRpc;
+["dayzCharDisco",		{ (_this select 1) call server_characterSync; }			] call registerServerRpc;
+["dayzGutBody",			{ (_this select 1) spawn server_gutObject; }			] call registerServerRpc;
+
+["usecMorphine",	{	
+						(_this select 1) select 0 setVariable["hit_legs",0];
+						(_this select 1) select 0 setVariable["hit_hands",0];
+					}] call registerServerRpc;
