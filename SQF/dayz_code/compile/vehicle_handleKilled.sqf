@@ -1,4 +1,4 @@
-private["_unit","_selection","_killer"];
+private["_unit","_hitPoints","_selection","_killer"];
 
 _unit = _this select 0;
 _killer = _this select 1;
@@ -10,13 +10,12 @@ _hitPoints = _unit call vehicle_getHitpoints;
 } forEach _hitPoints;
 
 dayzUpdateVehicle = [_unit, "damage", true];
-
 if (isServer) then {
 	if (allowConnection) then {
 		dayzUpdateVehicle call server_updateObject;
 	};
 } else {
-	publicVariable "dayzUpdateVehicle";
+	publicVariableServer "dayzUpdateVehicle";
 };
 
 _unit removeAllEventHandlers "HandleDamage";

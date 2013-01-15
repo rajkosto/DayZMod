@@ -1,4 +1,4 @@
-private["_hasKnife","_qty","_item","_text","_string","_type","_loop","_meat","_timer"];
+private["_item","_hasKnife","_hasKnifeBlunt","_hasHarvested","_qty","_text","_string","_type"];
 _item = _this select 3;
 _hasKnife = 	"ItemKnife" in items player;
 _hasKnifeBlunt = 	"ItemKnifeBlunt" in items player;
@@ -20,13 +20,12 @@ if (_hasKnife) then {
 
 if ((_hasKnife or _hasKnifeBlunt) and !_hasHarvested) then {
 	//Get Animal Type
-	_loop = true;	
 	_isListed =		isClass (_config);
 	_text = getText (configFile >> "CfgVehicles" >> _type >> "displayName");
 	
 	player playActionNow "Medic";
 	[player,"gut",0,false] call dayz_zombieSpeak;
-	_item setVariable["meatHarvested",true,true];
+	_item setVariable ["meatHarvested",true,true];
 	_item setVariable ["timerawmeatHarvested",time,false];
 	
 	_qty = 2;	
@@ -38,14 +37,12 @@ if ((_hasKnife or _hasKnifeBlunt) and !_hasHarvested) then {
 	
 	_id = [player,50,true,(getPosATL player)] spawn player_alertZombies;
 	
-	_array = [_item,_qty];
-	
-	if (local _item) then {
-		_array spawn local_gutObject;
+	dayzGutBody = [_item,_qty];
+	if (isServer) then {
+		dayzGutBody spawn server_gutObject;
 	} else {
-		dayzGutBody = _array;
-		publicVariable "dayzGutBody";
-	};
+		publicVariableServer "dayzGutBody";
+	};	
 	
 	sleep 6;
 	_string = format[localize "str_success_gutted_animal",_text,_qty];

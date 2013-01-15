@@ -422,9 +422,10 @@ class FSM
        "" \n
        "dayzLogin = [_playerUID,player];" \n
        "dayzPlayerLogin = [];" \n
-       "publicVariableServer ""dayzLogin"";" \n
        "if (isServer) then {" \n
        "	dayzLogin call server_playerLogin;" \n
+       "} else {" \n
+       "	publicVariableServer ""dayzLogin"";" \n
        "};"/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
       class Links
@@ -635,8 +636,11 @@ class FSM
        "" \n
        "dayzPlayerLogin2 = [];" \n
        "dayzLogin2 = [_charID,player,_playerUID];" \n
-       "publicVariableServer ""dayzLogin2"";" \n
-       "// remove isServer from player space" \n
+       "if (isServer) then {" \n
+       "	dayzLogin2 call server_playerSetup;" \n
+       "} else {" \n
+       "	publicVariableServer ""dayzLogin2"";" \n
+       "};" \n
        "" \n
        "dayz_loadScreenMsg =  ""Requesting Character data from server"";" \n
        "progressLoadingScreen 0.8;" \n
@@ -1132,7 +1136,11 @@ class FSM
        "dayz_myPosition = getPosATL player;" \n
        "" \n
        "dayzLoginRecord = [_playerUID,_charID,0];" \n
-       "publicVariableServer ""dayzLoginRecord"";"/*%FSM</STATEINIT""">*/;
+       "if (isServer) then {" \n
+       "	dayzLoginRecord call dayz_recordLogin;" \n
+       "} else {" \n
+       "	publicVariableServer ""dayzLoginRecord"";" \n
+       "};"/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
       class Links
       {

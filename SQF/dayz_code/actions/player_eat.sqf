@@ -56,9 +56,10 @@ _update set [3,true];
 player setVariable["updatePlayer",_update,true];
 */
 dayzPlayerSave = player;
-publicVariableServer "dayzPlayerSave";
 if (isServer) then {
 	dayzPlayerSave call server_updatePlayer;
+} else {
+	publicVariableServer "dayzPlayerSave";
 };
 
 dayz_lastMeal =	time;

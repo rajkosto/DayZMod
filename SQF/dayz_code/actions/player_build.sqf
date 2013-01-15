@@ -37,9 +37,10 @@ if (_hasrequireditem) then {
 	cutText [format[localize "str_build_01",_text], "PLAIN DOWN"];
 
 	dayzPublishObj = [dayz_characterID,_object,[_dir,_location],_classname];
-	publicVariableServer "dayzPublishObj";
 	if (isServer) then {
 		dayzPublishObj call server_publishObj;
+	} else {
+		publicVariableServer "dayzPublishObj";
 	};
 
 	sleep 2;

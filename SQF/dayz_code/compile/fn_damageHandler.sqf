@@ -32,7 +32,12 @@ if (_isPlayer) then {
 	if (_damage > 0.1) then {
 		dayz_canDisconnect = false;
 		dayzDiscoAdd = getPlayerUID player;
-		publicVariable "dayzDiscoAdd";
+		if (isServer) then {
+			dayzDiscoAdd call { dayz_disco set [count dayz_disco,_this]; };
+		} else {
+			publicVariableServer "dayzDiscoAdd";
+		};
+		
 		dayz_damageCounter = time;
 		
 		//Ensure Control is visible

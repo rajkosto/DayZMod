@@ -74,10 +74,13 @@ player setVariable["characterID",_charID,true];
 player setVariable["worldspace",_worldspace,true];
 
 dayzPlayerMorph = [_charID,player,_playerUID,[_zombieKills,_headShots,_humanKills,_banditKills],_humanity];
-publicVariable "dayzPlayerMorph";
+//code for this on the server is missing
+/*
 if (isServer) then {
 	dayzPlayerMorph call server_playerMorph;
-};
+} else {
+	publicVariableServer "dayzPlayerMorph";
+};*/
 
 call dayz_resetSelfActions;
 

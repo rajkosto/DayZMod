@@ -21,6 +21,7 @@ if (_unit == player) then {
 _unit setVariable ["hit_legs",0];
 _unit setVariable ["hit_hands",0];
 
+//this will never be true since server has a different usecMorphine function
 if (isServer) then {
 	_unit setVariable["medForceUpdate",true];
 };

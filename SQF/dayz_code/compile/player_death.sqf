@@ -9,9 +9,10 @@ _playerID =	getPlayerUID player;
 
 //Send Death Notice
 dayzDeath = [dayz_characterID,0,_body,_playerID,dayz_playerName];
-publicVariableServer "dayzDeath";
 if (isServer) then {
-	_id = dayzDeath spawn server_playerDied; 
+	dayzDeath spawn server_playerDied; 
+} else {
+	publicVariableServer "dayzDeath";
 };
 
 _id = [player,50,true,getPosATL player] spawn player_alertZombies;

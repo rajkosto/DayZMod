@@ -2,7 +2,11 @@ private ["_objects"];
 _objects = nearestObjects [getPosATL player, ["Car", "Helicopter", "Motorcycle", "Ship", "TentStorage"], 10];
 {
 	dayzUpdateVehicle = [_x,"gear"];
-	publicVariableServer "dayzUpdateVehicle";
+	if (isServer) then {
+		dayzUpdateVehicle call server_updateObject;
+	} else {
+		publicVariableServer "dayzUpdateVehicle";
+	};	
 } foreach _objects;
 
 private["_dialog","_magazineArray","_control","_item","_val","_max"];
