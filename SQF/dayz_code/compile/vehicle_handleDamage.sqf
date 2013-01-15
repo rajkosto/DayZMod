@@ -25,9 +25,7 @@ if (_dam < 1 ) then {
 			_unit setVariable ["needUpdate",true,true];
 		    dayzUpdateVehicle = [_unit,"damage"];
         	if (isServer) then {
-               	if (allowConnection) then {
-                	dayzUpdateVehicle call server_updateObject;
-            	};
+               	dayzUpdateVehicle call server_updateObject;
         	} else {
                 	publicVariableServer "dayzUpdateVehicle";
 		    };

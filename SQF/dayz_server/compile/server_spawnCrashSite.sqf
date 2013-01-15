@@ -1,7 +1,5 @@
 private["_position","_num","_config","_itemType","_itemChance","_weights","_index","_iArray","_crashModel","_lootTable","_guaranteedLoot","_randomizedLoot","_frequency","_variance","_spawnChance","_spawnMarker","_spawnRadius","_spawnFire","_permanentFire","_crashName"];
 
-waitUntil{!isNil "BIS_fnc_selectRandom"};
-
 //_crashModel	= _this select 0;
 //_lootTable	= _this select 1;
 _guaranteedLoot = _this select 0;
@@ -91,8 +89,6 @@ while {true} do {
 		_index =		dayz_CBLCounts find (count _itemTypes);
 		_weights =		dayz_CBLChances select _index;
 		_cntWeights = count _weights;
-
-		waituntil {!isnil "fnc_buildWeightedArray"};
 
 		for "_x" from 1 to _num do {
 			//create loot

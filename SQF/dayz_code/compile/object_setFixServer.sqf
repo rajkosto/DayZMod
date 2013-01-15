@@ -14,9 +14,7 @@ if (_selection != "" and local _unit) then {
 		dayzUpdateVehicle = [_unit,"damage"];
 	};
 	if (isServer) then {
-		if (allowConnection) then {
-			dayzUpdateVehicle call server_updateObject;
-		};
+		dayzUpdateVehicle call server_updateObject;
 	} else {
 		publicVariableServer "dayzUpdateVehicle";
 	};

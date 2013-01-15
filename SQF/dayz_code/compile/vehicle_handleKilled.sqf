@@ -11,9 +11,7 @@ _hitPoints = _unit call vehicle_getHitpoints;
 
 dayzUpdateVehicle = [_unit, "damage", true];
 if (isServer) then {
-	if (allowConnection) then {
-		dayzUpdateVehicle call server_updateObject;
-	};
+	dayzUpdateVehicle call server_updateObject;
 } else {
 	publicVariableServer "dayzUpdateVehicle";
 };

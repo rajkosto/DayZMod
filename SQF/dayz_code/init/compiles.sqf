@@ -424,21 +424,10 @@ if (!isDedicated) then {
 	dayz_originalPlayer =		player;
 };
 
-	BIS_fnc_selectRandom =		compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\fn_selectRandom.sqf";		//Checks which actions for nearby casualty
-
-//Server Only
-if (isServer) then {
-	call compile preprocessFileLineNumbers "\z\addons\dayz_server\init\server_functions.sqf";
-} else {
-	eh_localCleanup = {};
-};
-
 	progressLoadingScreen 0.8;
-	
-//Both
-	//Start Dynamic Weather
-	execVM "\z\addons\dayz_code\external\DynamicWeatherEffects.sqf";
 
+	//Both
+	BIS_fnc_selectRandom =		compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\fn_selectRandom.sqf";		//Checks which actions for nearby casualty
 	fnc_buildWeightedArray = 	compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\fn_buildWeightedArray.sqf";		//Checks which actions for nearby casualty
 	fnc_usec_damageVehicle =	compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\fn_damageHandlerVehicle.sqf";		//Event handler run on damage
 	zombie_initialize = 		compile preprocessFileLineNumbers "\z\addons\dayz_code\init\zombie_init.sqf";
@@ -504,5 +493,15 @@ if (isServer) then {
 		];
 		_medical
 	};
+
+	//Server Only
+	if (isServer) then {
+		call compile preprocessFileLineNumbers "\z\addons\dayz_server\init\server_functions.sqf";
+	} else {
+		eh_localCleanup = {};
+	};
+
+	//Start Dynamic Weather
+	execVM "\z\addons\dayz_code\external\DynamicWeatherEffects.sqf";
 	
 	initialized = true;
