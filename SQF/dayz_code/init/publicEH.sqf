@@ -50,9 +50,17 @@ registerBroadcastRpc = {
 };
 
 //both
-["dayzSetFuel",		{ (_this select 1) call local_setFuel; }		] call registerBroadcastRpc;
-["dayzSetFix",		{ (_this select 1) call object_setFixServer; }	] call registerBroadcastRpc;
-["dayzSetDate",		{ setDate (_this select 1); }					] call registerBroadcastRpc;
+["dayzSetFuel",		{ (_this select 1) call local_setFuel; }			] call registerBroadcastRpc;
+["dayzSetFix",		{ (_this select 1) call object_setFixServer; }		] call registerBroadcastRpc;
+["dayzSetDate",		{ setDate (_this select 1); }						] call registerBroadcastRpc;
+//EHs that setVariable "medForceUpdate" need to run on the server too
+["usecMorphine",		{ (_this select 1) call player_medMorphine; }	] call registerBroadcastRpc;
+["usecBandage",			{ (_this select 1) call player_medBandage; }	] call registerBroadcastRpc;
+["usecEpi",				{ (_this select 1) call player_medEpi; }		] call registerBroadcastRpc;
+["usecTransfuse",		{ (_this select 1) call player_medTransfuse; }	] call registerBroadcastRpc;
+["usecPainK",			{ (_this select 1) call player_medPainkiller; }	] call registerBroadcastRpc;
+//BIS_Effects_Burn is empty on the server anyway, but this EH is called
+["dayzFire",			{ (_this select 1) spawn BIS_Effects_Burn; }	] call registerBroadcastRpc;
 
 //server only
 if (isServer) then {
@@ -63,12 +71,7 @@ if (isServer) then {
 if (!isDedicated) then {
 	["norrnRaLW",   		{ [_this select 1] execVM "\z\addons\dayz_code\medical\publicEH\load_wounded.sqf"; }] call registerBroadcastRpc;
 	["norrnRLact",			{ [_this select 1] execVM "\z\addons\dayz_code\medical\load\load_wounded.sqf"; }	] call registerBroadcastRpc;	
-	["usecMorphine",		{ (_this select 1) call player_medMorphine; }										] call registerBroadcastRpc;
 	["usecBleed",			{ (_this select 1) spawn fnc_usec_damageBleed; }									] call registerBroadcastRpc;
-	["usecBandage",			{ (_this select 1) call player_medBandage; }										] call registerBroadcastRpc;
-	["usecEpi",				{ (_this select 1) call player_medEpi; }											] call registerBroadcastRpc;
-	["usecTransfuse",		{ (_this select 1) call player_medTransfuse; }										] call registerBroadcastRpc;
-	["usecPainK",			{ (_this select 1) call player_medPainkiller; }										] call registerBroadcastRpc;
 	["dayzHideBody",		{ hideBody (_this select 1); }														] call registerBroadcastRpc;
 	["dayzHumanity",		{ (_this select 1) spawn player_humanityChange; }									] call registerBroadcastRpc;
 	["dayzHitV",			{ (_this select 1) call fnc_usec_damageVehicle; }									] call registerBroadcastRpc;
@@ -76,5 +79,4 @@ if (!isDedicated) then {
 	["dayzFlies",			{ (_this select 1) call spawn_flies; }												] call registerBroadcastRpc;
 	["dayzRoadFlare",		{ (_this select 1) spawn object_roadFlare; }										] call registerBroadcastRpc;
 	["norrnRaDrag",			{ [_this select 1] execVM "\z\addons\dayz_code\medical\publicEH\animDrag.sqf"; }	] call registerBroadcastRpc;
-	["dayzFire",			{ (_this select 1) spawn BIS_Effects_Burn; }										] call registerBroadcastRpc;
 };

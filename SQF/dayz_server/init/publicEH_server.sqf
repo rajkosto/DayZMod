@@ -19,8 +19,3 @@ registerServerRpc = {
 ["dayzLoginRecord",		{ (_this select 1) call dayz_recordLogin; }				] call registerServerRpc;
 ["dayzCharDisco",		{ (_this select 1) call server_characterSync; }			] call registerServerRpc;
 ["dayzGutBody",			{ (_this select 1) spawn server_gutObject; }			] call registerServerRpc;
-
-["usecMorphine",	{	
-						(_this select 1) select 0 setVariable["hit_legs",0];
-						(_this select 1) select 0 setVariable["hit_hands",0];
-					}] call registerServerRpc;

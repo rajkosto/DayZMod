@@ -18,10 +18,9 @@ if (_unit == player) then {
 	
 	_id = false spawn dayz_disableRespawn;
 };
-_unit setVariable ["hit_legs",0];
-_unit setVariable ["hit_hands",0];
+_unit setVariable ["hit_legs",0,false];
+_unit setVariable ["hit_hands",0,false];
 
-//this will never be true since server has a different usecMorphine function
 if (isServer) then {
 	_unit setVariable["medForceUpdate",true];
 };

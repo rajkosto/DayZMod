@@ -17,7 +17,7 @@ if (_unit == player) then {
 	_control = 	_display displayCtrl  1303;
 	_control ctrlShow false;
 };
-//never true since this EH isn't registered on the server
+
 if (isServer) then {
 	_unit setVariable["medForceUpdate",true];
 };

@@ -7,7 +7,7 @@ if (_unit == player) then {
 	r_player_inpain = false;
 	"dynamicBlur" ppEffectAdjust [0]; "dynamicBlur" ppEffectCommit 5;
 };
-//never true since this EH isn't registered on the server
+
 if (isServer) then {
 	_unit setVariable["medForceUpdate",true];
 };
